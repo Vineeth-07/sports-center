@@ -4,10 +4,10 @@ import { useMatchesDispatch } from "../../context/matches/context";
 import MatchListItems from "./MatchListItems";
 
 const MatchList: React.FC = () => {
-  const dispatchMembers = useMatchesDispatch();
+  const dispatchMatches = useMatchesDispatch();
 
   useEffect(() => {
-    fetchMatches(dispatchMembers);
+    fetchMatches(dispatchMatches);
   }, []);
 
   return (
