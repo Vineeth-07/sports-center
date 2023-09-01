@@ -11,7 +11,6 @@ export default function MatchListItems() {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
-  console.log(matches);
   return (
     <>
       {matches.map(
