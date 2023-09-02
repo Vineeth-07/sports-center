@@ -8,6 +8,7 @@ const Dashboard: React.FC = () => {
     <div className=" static min-h-screen flex-row justify-center bg-gray-100">
       <AccountLayout />
       <Matches />
+      <br />
       <Articles />
     </div>
   );

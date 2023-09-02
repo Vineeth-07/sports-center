@@ -15,18 +15,31 @@ export default function ArticleListItems() {
   return (
     <>
       {articles.map((article: any) => (
-        <div key={article.id} className="flex flex-col">
-          <div className="flex justify-between">
-            <h5 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-              <span className="font-bold ">{article.sport.name}</span>
-            </h5>
-          </div>
-          <p className="mb-2 font-medium tracking-tight text-gray-900 dark:text-white">
-            <span className="font-semibold flex justify-left">
-              {" "}
-              {article.title}
+        <div
+          key={article.id}
+          className="flex-col ml-6 pt-4 mt-1 suspense-loading block match p-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+          <div className="flex justify-between ">
+            <span className="mb-2 font-medium tracking-tight text-gray-900 dark:text-white">
+              {article.sport.name}
             </span>
+          </div>
+          <p className="font-bold ">
+            <span className="flex justify-left"> {article.title}</span>
           </p>
+          <p>
+            <span className="flex justify-left"> {article.summary}</span>
+          </p>
+          <p className="flex justify-between">
+            Date : {article.date.slice(0, 10)}
+          </p>
+          <div className="w-8/12 h-48 flex justify-center p-2">
+            <img
+              className="h-40 w-10/12 static border-4 rounded-xl border-gray-300"
+              src={article.thumbnail}
+              alt=""
+            />
+          </div>
         </div>
       ))}
     </>
