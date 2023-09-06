@@ -29,7 +29,6 @@ const ArticleDetails: React.FC<{ id: number }> = ({ id }) => {
 
   const ArticleDetails = async () => {
     const authToken = localStorage.getItem("authToken");
-    console.log("Clicked");
     try {
       const response = await fetch(`${API_ENDPOINT}/articles/${id}`, {
         method: "GET",
@@ -52,7 +51,6 @@ const ArticleDetails: React.FC<{ id: number }> = ({ id }) => {
 
   useEffect(() => {
     ArticleDetails();
-    console.log(ArticleDetails);
   }, [id]);
 
   return (

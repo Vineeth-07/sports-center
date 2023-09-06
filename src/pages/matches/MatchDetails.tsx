@@ -30,7 +30,6 @@ const MatchDetails: React.FC<{ id: number }> = ({ id }) => {
 
   const MatchDetails = async () => {
     const authToken = localStorage.getItem("authToken");
-    console.log("Clicked");
     try {
       const response = await fetch(`${API_ENDPOINT}/matches/${id}`, {
         method: "GET",
@@ -65,11 +64,26 @@ const MatchDetails: React.FC<{ id: number }> = ({ id }) => {
                 {team.split(" ")[0]}: {score}
               </li>
             ))}
-            <button onClick={MatchDetails}>Reload</button>
+            <button onClick={MatchDetails}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                />
+              </svg>
+            </button>
           </ul>
         )}
       </h1>
-      <div className="relative top-0 left-20">
+      <div className="relative flex justify-left">
         <button type="button" onClick={openModal} style={{ color: "blue" }}>
           More details
         </button>

@@ -20,7 +20,7 @@ const Appbar = () => {
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <h3 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-                    Sports Center
+                    SportsBuzz
                   </h3>
                 </div>
               </div>
