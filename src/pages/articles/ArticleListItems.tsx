@@ -1,4 +1,5 @@
 import { useArticlesState } from "../../context/articles/context";
+import ArticleDetails from "./ArticleDetails";
 
 export default function ArticleListItems() {
   let state: any = useArticlesState();
@@ -13,6 +14,9 @@ export default function ArticleListItems() {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
+  const renderArticleDetailsWithId = (id: number) => {
+    return <ArticleDetails id={id} />;
+  };
   return (
     <>
       {articles.map((article: any) => (
@@ -37,6 +41,9 @@ export default function ArticleListItems() {
               </p>
               <p className="">Date : {article.date.slice(0, 10)}</p>
             </span>
+            <div className="flex justify-left">
+              {renderArticleDetailsWithId(article.id)}
+            </div>
           </div>
         </div>
       ))}
