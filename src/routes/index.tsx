@@ -5,11 +5,6 @@ import Signup from "../pages/signup";
 import Dashboard from "../pages/dashboard";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Navigate to="/dashboard" replace /> },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
   {
     path: "/signin",
     element: <Signin />,
@@ -21,6 +16,16 @@ const router = createBrowserRouter([
   {
     path: "/logout",
     element: <Logout />,
+  },
+  {
+    path: "/",
+    children: [
+      { index: true, element: <Navigate to="/dashboard" replace /> },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+    ],
   },
 ]);
 

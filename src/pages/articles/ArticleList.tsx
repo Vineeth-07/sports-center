@@ -11,7 +11,7 @@ const ArticleList: React.FC = () => {
   }, []);
 
   return (
-    <div className="suspense-loading grid gap-4 grid-cols-4 mt-5">
+    <div className="bg-gray-100 min-h-screen py-2 px-4 sm:px-6 lg:px-8">
       <ArticleListItems />
     </div>
   );
