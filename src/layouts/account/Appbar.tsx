@@ -2,10 +2,18 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 
-const userNavigation = [
+const loggedInUser = [
   { name: "Preferences", href: "#" },
   { name: "Sign out", href: "/logout" },
 ];
+
+const guestUser = [
+  { name: "Sign up", href: "/users" },
+  { name: "Sign in", href: "/users/sign_in" },
+];
+
+const token = localStorage.getItem("authToken") ?? "";
+let handler = token ? loggedInUser : guestUser;
 
 const classNames = (...classes: string[]): string =>
   classes.filter(Boolean).join(" ");
@@ -45,7 +53,7 @@ const Appbar = () => {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {userNavigation.map((item) => (
+                        {handler.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
                               <a
