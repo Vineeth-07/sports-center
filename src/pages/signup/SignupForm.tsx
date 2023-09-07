@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
-  userName: string;
-  userEmail: string;
-  userPassword: string;
+  name: string;
+  email: string;
+  password: string;
 };
 
 const SignupForm: React.FC = () => {
@@ -18,15 +18,15 @@ const SignupForm: React.FC = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { userName, userEmail, userPassword } = data;
+    const { name, email, password } = data;
     try {
       const response = await fetch(`${API_ENDPOINT}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: userName,
-          email: userEmail,
-          password: userPassword,
+          name: name,
+          email: email,
+          password: password,
         }),
       });
 
@@ -37,7 +37,7 @@ const SignupForm: React.FC = () => {
       const data = await response.json();
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("userData", JSON.stringify(data.user));
-      navigate("/articles");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Sign-up failed:", error);
     }
@@ -51,11 +51,11 @@ const SignupForm: React.FC = () => {
         </label>
         <input
           type="text"
-          id="userName"
-          {...register("userName", { required: true })}
+          id="name"
+          {...register("name", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
-        {errors.userName && (
+        {errors.name && (
           <span className="text-red-500 text-sm">This field is required</span>
         )}
       </div>
@@ -63,11 +63,11 @@ const SignupForm: React.FC = () => {
         <label className="block text-gray-700 font-semibold mb-2">Email:</label>
         <input
           type="email"
-          id="userEmail"
-          {...register("userEmail", { required: true })}
+          id="email"
+          {...register("email", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
-        {errors.userEmail && (
+        {errors.email && (
           <span className="text-red-500 text-sm">This field is required</span>
         )}
       </div>
@@ -77,11 +77,11 @@ const SignupForm: React.FC = () => {
         </label>
         <input
           type="password"
-          id="userPassword"
-          {...register("userPassword", { required: true })}
+          id="password"
+          {...register("password", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
-        {errors.userPassword && (
+        {errors.password && (
           <span className="text-red-500 text-sm">This field is required</span>
         )}
       </div>

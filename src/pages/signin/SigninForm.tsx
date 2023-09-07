@@ -36,7 +36,7 @@ const SigninForm: React.FC = () => {
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("userData", JSON.stringify(data.user));
 
-      navigate("/account");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
@@ -78,7 +78,7 @@ const SigninForm: React.FC = () => {
       </button>
       <p style={{ fontStyle: "italic" }}>
         Don't have accont?{" "}
-        <a href="/signup" style={{ color: "blue" }}>
+        <a href="/users" style={{ color: "blue" }}>
           Signup here
         </a>
       </p>
