@@ -55,7 +55,7 @@ const ArticleDetails: React.FC<{ id: number }> = ({ id }) => {
 
   return (
     <>
-      <div className="relative top-0 left-20">
+      <div className=" relative flex justify-left">
         <button type="button" onClick={openModal} style={{ color: "blue" }}>
           Read more
         </button>
