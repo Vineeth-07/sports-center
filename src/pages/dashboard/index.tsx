@@ -2,6 +2,7 @@ import React from "react";
 import AccountLayout from "../../layouts/account";
 import Matches from "../matches";
 import Articles from "../articles";
+import Favourites from "../favourites/Favourites";
 
 const Dashboard: React.FC = () => {
   return (
@@ -9,7 +10,16 @@ const Dashboard: React.FC = () => {
       <AccountLayout />
       <Matches />
       <br />
-      <Articles />
+      <div className="flex">
+        <div>
+          {" "}
+          <Articles />
+        </div>
+        <div className="w-6/12 justify-between">
+          {" "}
+          <Favourites />
+        </div>
+      </div>
     </div>
   );
 };

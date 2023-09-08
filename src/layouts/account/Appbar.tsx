@@ -13,6 +13,7 @@ const guestUser = [
 ];
 
 const token = localStorage.getItem("authToken") ?? "";
+console.log(token);
 let handler = token ? loggedInUser : guestUser;
 
 const classNames = (...classes: string[]): string =>

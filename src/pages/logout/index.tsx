@@ -7,7 +7,7 @@ const Logout = () => {
     localStorage.removeItem("userData");
   }, []);
 
-  return <Navigate to="/signin" />;
+  return <Navigate to="/users/sign_in" />;
 };
 
 export default Logout;
