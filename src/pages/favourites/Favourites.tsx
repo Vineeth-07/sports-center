@@ -121,10 +121,10 @@ export default function Favourites() {
 
                   <p className="bg-gray-200 p-2 rounded-lg relative">
                     {article.summary.slice(0, 130)}...
-                    <button className="absolute right-0 rounded-md px-1 text-md bg-gray-700 text-white hover:text-blue-60 mr-3">
-                      Read More
-                    </button>
                   </p>
+                  <div className="flex justify-left">
+                    {renderArticleDetailsWithId(article.id)}
+                  </div>
                 </div>
               </div>
             )
