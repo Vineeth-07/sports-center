@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
+import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const loggedInUser = [
   { name: "Preferences", href: "#" },
@@ -26,9 +28,13 @@ const Appbar = () => {
         {({}) => (
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
+              <Link to={"/"}>
+                {" "}
+                <img src={logo} className="w-14 h-14" />
+              </Link>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <h3 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
+                  <h3 className="mb-2 text-[2em] font-bold tracking-tight text-gray-900 dark:text-white">
                     SportsBuzz
                   </h3>
                 </div>

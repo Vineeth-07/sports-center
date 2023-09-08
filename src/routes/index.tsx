@@ -3,6 +3,9 @@ import Logout from "../pages/logout";
 import Signin from "../pages/signin";
 import Signup from "../pages/signup";
 import Dashboard from "../pages/dashboard";
+import Home from "../pages/Home";
+
+const isUserAuthenticated = localStorage.getItem("authToken") !== null;
 
 const router = createBrowserRouter([
   {
@@ -18,14 +21,16 @@ const router = createBrowserRouter([
     element: <Logout />,
   },
   {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+  {
     path: "/",
-    children: [
-      { index: true, element: <Navigate to="/dashboard" replace /> },
-      {
-        path: "dashboard",
-        element: <Dashboard />,
-      },
-    ],
+    element: isUserAuthenticated ? (
+      <Navigate to="/dashboard" replace />
+    ) : (
+      <Home />
+    ),
   },
 ]);
 
