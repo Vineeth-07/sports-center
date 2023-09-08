@@ -71,12 +71,15 @@ export default function Favourites() {
   return (
     <>
       <div>
-        <h1>Favourites</h1>
-        <label htmlFor="sports">Sports:</label>
+        <div className="flex flex-col items-center">
+          <h2 className="text-xl font-medium dark:text-white">Favourites</h2>
+        </div>
+        <br />
         <select
           name="sports"
           id="sports"
           onChange={(e) => selectSport(parseInt(e.target.value, 10))}
+          className="p-2 border rounded-lg text-sm"
         >
           <option value="">Select a sport</option>
           {sports.map((sport: any) => (
@@ -85,11 +88,11 @@ export default function Favourites() {
             </option>
           ))}
         </select>
-        <label htmlFor="teams">Teams:</label>
         <select
           name="teams"
           id="teams"
           onChange={(e) => selectTeam(parseInt(e.target.value, 10))}
+          className="p-2 border rounded-lg text-sm"
         >
           <option value="">Select a team</option>
           {teams.map((team: any) => (
