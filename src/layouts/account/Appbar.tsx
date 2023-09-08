@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/images/logo.png";
@@ -14,14 +14,25 @@ const guestUser = [
   { name: "Sign in", href: "/users/sign_in" },
 ];
 
-const token = localStorage.getItem("authToken") ?? "";
-console.log(token);
-let handler = token ? loggedInUser : guestUser;
+type User = string | null;
 
 const classNames = (...classes: string[]): string =>
   classes.filter(Boolean).join(" ");
 
 const Appbar = () => {
+  const authToken: User = localStorage.getItem("authToken");
+
+  const [user, setUser] = useState<User>(null);
+
+  useEffect(() => {
+    if (authToken) {
+      setUser(authToken);
+    } else {
+      setUser(null);
+    }
+  }, [authToken]);
+  let handler = user ? loggedInUser : guestUser;
+
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-200">

@@ -49,8 +49,6 @@ export default function Favourites() {
     fetchTeams();
     fetchSports();
   }, []);
-  console.log(sports);
-  console.log(teams);
 
   const [selectedSport, setSelectSport] = useState(1);
   useEffect(() => {
