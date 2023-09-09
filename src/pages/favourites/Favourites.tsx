@@ -47,7 +47,6 @@ export default function Favourites() {
       setTeams(data);
     };
     fetchTeams();
-    fetchSports();
   }, []);
 
   const [selectedSport, setSelectSport] = useState(1);
@@ -107,10 +106,7 @@ export default function Favourites() {
             Object.values(article.teams).some(
               (team: any) => team.id === selectedTeam
             ) && (
-              <div
-                key={article.id}
-                className="bg-inherit overflow-y-auto h-screen"
-              >
+              <div key={article.id} className="bg-inherit">
                 <div
                   key={article.id}
                   className="bg-gray-300 p-4 m-2 rounded-lg"

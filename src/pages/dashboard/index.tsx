@@ -6,7 +6,7 @@ import Favourites from "../favourites/Favourites";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className=" static min-h-screen flex-row justify-center bg-gray-100">
+    <div className=" static min-h-screen flex-row justify-center bg-gray-100 p-10">
       <AccountLayout />
       <Matches />
       <br />

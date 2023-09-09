@@ -36,7 +36,6 @@ export default function ArticleListItems() {
       const data = await response.json();
       setSports(data.sports);
     };
-
     fetchSports();
   }, []);
 
@@ -120,7 +119,7 @@ export default function ArticleListItems() {
                     <span className="mb-2 font-medium tracking-tight text-gray-900 dark:text-white ">
                       {article.sport.name}
                       <p className="font-bold ">
-                        <span className=""> {article.title}</span>
+                        <span className="font-bold"> {article.title}</span>
                       </p>
                       <p>
                         <span className=""> {article.summary}</span>

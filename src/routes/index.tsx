@@ -4,6 +4,8 @@ import Signin from "../pages/signin";
 import Signup from "../pages/signup";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/Home";
+import ProtectedRoute from "./ProtectedRoute";
+import Preferences from "../pages/preferences/Preferences";
 
 const isUserAuthenticated = localStorage.getItem("authToken") !== null;
 
@@ -24,6 +26,15 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
   },
+  {
+    path: "/preferences",
+    element: (
+      <ProtectedRoute>
+        <Preferences />
+      </ProtectedRoute>
+    ),
+  },
+
   {
     path: "/",
     element: isUserAuthenticated ? (

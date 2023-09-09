@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 
 const loggedInUser = [
-  { name: "Preferences", href: "#" },
+  { name: "Preferences", href: "/preferences" },
   { name: "Sign out", href: "/logout" },
 ];
 
@@ -35,7 +35,7 @@ const Appbar = () => {
 
   return (
     <>
-      <Disclosure as="nav" className="border-b border-slate-200">
+      <Disclosure as="nav" className="border-b border-slate-200 bg-purple-300">
         {({}) => (
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
