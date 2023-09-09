@@ -39,6 +39,7 @@ export default function Favourites() {
       setSports(data.sports);
     };
     fetchSports();
+
     const fetchTeams = async () => {
       const response = await fetch(`${API_ENDPOINT}/teams`, {
         method: "GET",
@@ -94,11 +95,17 @@ export default function Favourites() {
           className="p-2 border rounded-lg text-sm"
         >
           <option value="">Select a team</option>
-          {teams.map((team: any) => (
-            <option key={team.id} value={team.id}>
-              {team.name}
-            </option>
-          ))}
+          {teams
+            .filter(
+              (team) =>
+                sports.find((sport) => sport.id === selectedSport)?.name ===
+                team.plays
+            )
+            .map((team: any) => (
+              <option key={team.id} value={team.id}>
+                {team.name}
+              </option>
+            ))}
         </select>
         {articles.map(
           (article: any) =>
