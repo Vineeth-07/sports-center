@@ -6,14 +6,17 @@ import { fetchTeams } from "../../context/teams/action";
 import { fetchArticles } from "../../context/articles/action";
 
 export default function Favourites() {
-  let state: any = useArticlesState();
+  const state: any = useArticlesState();
   const { articles, isLoading, isError, errorMessage } = state;
+
   if (articles.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
+
   if (isError) {
     return <span>{errorMessage}</span>;
   }
+
   const renderArticleDetailsWithId = (id: number) => {
     return <ArticleDetails id={id} />;
   };
@@ -22,13 +25,17 @@ export default function Favourites() {
     id: number;
     name: string;
   };
+
   type Teams = {
     id: number;
     name: string;
     plays: string;
   };
+
   const [sports, setSports] = useState<Sports[]>([]);
   const [teams, setTeams] = useState<Teams[]>([]);
+  const [selectedSport, setSelectSport] = useState<number | null>(null);
+  const [selectedTeam, setSelectTeam] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchSports = async () => {
@@ -38,35 +45,53 @@ export default function Favourites() {
       const data = await response.json();
       setSports(data.sports);
     };
-    fetchSports();
 
-    const fetchTeams = async () => {
+    const fetchTeamsData = async () => {
       const response = await fetch(`${API_ENDPOINT}/teams`, {
         method: "GET",
       });
       const data = await response.json();
       setTeams(data);
     };
-    fetchTeams();
+
+    fetchSports();
+    fetchTeamsData();
   }, []);
 
-  const [selectedSport, setSelectSport] = useState(1);
   useEffect(() => {
-    fetchArticles(selectedSport);
+    if (selectedSport !== null) {
+      fetchArticles(selectedSport);
+    }
   }, [selectedSport]);
 
-  const selectSport = (id: number) => {
+  useEffect(() => {
+    if (selectedTeam !== null) {
+      fetchTeams(selectedTeam);
+    }
+  }, [selectedTeam]);
+
+  const selectSport = (id: number | null) => {
     setSelectSport(id);
+    setSelectTeam(null);
   };
 
-  const [selectedTeam, setSelectTeam] = useState(1);
-  useEffect(() => {
-    fetchTeams(selectedTeam);
-  }, [selectedSport]);
-
-  const selectTeam = (id: number) => {
+  const selectTeam = (id: number | null) => {
     setSelectTeam(id);
   };
+
+  const filteredArticles = articles.filter((article: any) => {
+    if (selectedSport !== null) {
+      const sportMatches = article.sport.id === selectedSport;
+      const teamMatches =
+        selectedTeam === null ||
+        Object.values(article.teams).some(
+          (team: any) => team.id === selectedTeam
+        );
+      return sportMatches && teamMatches;
+    } else {
+      return true;
+    }
+  });
 
   return (
     <>
@@ -78,7 +103,7 @@ export default function Favourites() {
         <select
           name="sports"
           id="sports"
-          onChange={(e) => selectSport(parseInt(e.target.value, 10))}
+          onChange={(e) => selectSport(parseInt(e.target.value, 10) || null)}
           className="p-2 border rounded-lg text-sm"
         >
           <option value="">Select a sport</option>
@@ -91,15 +116,16 @@ export default function Favourites() {
         <select
           name="teams"
           id="teams"
-          onChange={(e) => selectTeam(parseInt(e.target.value, 10))}
+          onChange={(e) => selectTeam(parseInt(e.target.value, 10) || null)}
           className="p-2 border rounded-lg text-sm"
         >
           <option value="">Select a team</option>
           {teams
             .filter(
               (team) =>
+                selectedSport === null ||
                 sports.find((sport) => sport.id === selectedSport)?.name ===
-                team.plays
+                  team.plays
             )
             .map((team: any) => (
               <option key={team.id} value={team.id}>
@@ -107,32 +133,20 @@ export default function Favourites() {
               </option>
             ))}
         </select>
-        {articles.map(
-          (article: any) =>
-            article.sport.id === selectedSport &&
-            Object.values(article.teams).some(
-              (team: any) => team.id === selectedTeam
-            ) && (
-              <div key={article.id} className="bg-inherit">
-                <div
-                  key={article.id}
-                  className="bg-gray-300 p-4 m-2 rounded-lg"
-                >
-                  <h2 className="font-semibold text-lg">
-                    {article.sport.name}
-                  </h2>
-                  <h2 className="text-lg">{article.title}</h2>
-
-                  <p className="bg-gray-200 p-2 rounded-lg relative">
-                    {article.summary.slice(0, 130)}...
-                  </p>
-                  <div className="flex justify-left">
-                    {renderArticleDetailsWithId(article.id)}
-                  </div>
-                </div>
+        {filteredArticles.map((article: any) => (
+          <div key={article.id} className="bg-inherit">
+            <div key={article.id} className="bg-gray-300 p-4 m-2 rounded-lg">
+              <h2 className="font-semibold text-lg">{article.sport.name}</h2>
+              <h2 className="text-lg">{article.title}</h2>
+              <p className="bg-gray-200 p-2 rounded-lg relative">
+                {article.summary.slice(0, 130)}...
+              </p>
+              <div className="flex justify-left">
+                {renderArticleDetailsWithId(article.id)}
               </div>
-            )
-        )}
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

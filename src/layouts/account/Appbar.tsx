@@ -3,9 +3,10 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import Preferences from "../../pages/preferences/Preferences";
 
 const loggedInUser = [
-  { name: "Preferences", href: "/preferences" },
+  { name: "Change password", href: "/changepassword" },
   { name: "Sign out", href: "/logout" },
 ];
 
@@ -53,7 +54,8 @@ const Appbar = () => {
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
                   <Menu as="div" className="relative ml-3">
-                    <div>
+                    <div className="space-x-4 flex">
+                      <div>{user && <Preferences />}</div>
                       <Menu.Button className="rounded-full bg-white p-1 text-gray-400 hover:text-blue-600">
                         <UserCircleIcon
                           className="h-6 w-6"

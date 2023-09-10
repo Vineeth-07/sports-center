@@ -39,13 +39,14 @@ export default function ArticleListItems() {
     fetchSports();
   }, []);
 
-  const [selectedSport, setSelectSport] = useState(1);
+  const [selectedSport, setSelectSport] = useState<number | "all">("all");
+
   useEffect(() => {
     fetchArticles(selectedSport);
   }, [selectedSport]);
 
-  const selectSport = (id: number) => {
-    setSelectSport(id);
+  const selectSport = (sportId: number | "all") => {
+    setSelectSport(sportId);
   };
 
   const [sortBy, setSortBy] = useState("date");
@@ -60,10 +61,13 @@ export default function ArticleListItems() {
         return 0;
     }
   };
-  const sortedArticles = [...articles].filter(
-    (article: any) => article.sport.id === selectedSport
-  );
-  sortedArticles.sort(sortArticles);
+
+  const filteredArticles =
+    selectedSport === "all"
+      ? articles
+      : articles.filter((article: any) => article.sport.id === selectedSport);
+
+  filteredArticles.sort(sortArticles);
 
   return (
     <>
@@ -71,6 +75,18 @@ export default function ArticleListItems() {
         <div className="flex justify-between">
           <Tab.List className="space-x-4 rounded p-1 w-20/12">
             <Tab>
+              <p
+                key="all"
+                className={
+                  selectedSport === "all"
+                    ? "active border-2 p-2 border-black rounded-lg inline-block"
+                    : "p-2 border-black rounded-lg inline-block"
+                }
+                onClick={() => selectSport("all")}
+              >
+                {" "}
+                All Sports
+              </p>
               {sports.map((sport: any) => (
                 <p
                   key={sport.id}
@@ -101,10 +117,10 @@ export default function ArticleListItems() {
         </div>
         <Tab.Panels>
           <Tab.Panel>
-            {sortedArticles.length === 0 ? (
+            {filteredArticles.length === 0 ? (
               <img src={img} style={{ width: "1200px", height: "1200px" }} />
             ) : (
-              sortedArticles.map((article: any) => (
+              filteredArticles.map((article: any) => (
                 <div
                   key={article.id}
                   className="w-90 container flex-1 rounded border border-black flex text-left"
