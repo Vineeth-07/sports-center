@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { API_ENDPOINT } from "../../config/constants";
-import { useArticlesState } from "../../context/articles/context";
+import {
+  useArticlesDispatch,
+  useArticlesState,
+} from "../../context/articles/context";
 import ArticleDetails from "./ArticleDetails";
 import { Tab } from "@headlessui/react";
 import { fetchArticles } from "../../context/articles/action";
@@ -8,7 +11,6 @@ import img from "../../assets/images/noData.jpg";
 
 export default function ArticleListItems() {
   let state: any = useArticlesState();
-
   const { articles, isLoading, isError, errorMessage } = state;
 
   if (articles.length === 0 && isLoading) {
@@ -64,10 +66,11 @@ export default function ArticleListItems() {
   }, []);
 
   const [selectedSport, setSelectSport] = useState<number | "all">("all");
+  const dispatchArticles = useArticlesDispatch();
 
   useEffect(() => {
-    fetchArticles(selectedSport);
-  }, [selectedSport]);
+    fetchArticles(dispatchArticles);
+  }, []);
 
   const selectSport = (sportId: number | "all") => {
     setSelectSport(sportId);
