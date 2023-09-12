@@ -7,6 +7,7 @@ import {
 import ArticleDetails from "../articles/ArticleDetails";
 import { fetchTeams } from "../../context/teams/action";
 import { fetchArticles } from "../../context/articles/action";
+import { useTeamsDispatch } from "../../context/teams/context";
 
 export default function Favourites() {
   const state: any = useArticlesState();
@@ -64,7 +65,6 @@ export default function Favourites() {
       const data = await response.json();
       setTeams(data);
     };
-
     fetchSports();
     fetchTeamsData();
   }, []);
@@ -87,6 +87,7 @@ export default function Favourites() {
     fetchPreferences();
   }, []);
   const dispatchArticles = useArticlesDispatch();
+  const dispatchTeams = useTeamsDispatch();
 
   useEffect(() => {
     if (selectedSport !== null) {
@@ -96,9 +97,9 @@ export default function Favourites() {
 
   useEffect(() => {
     if (selectedTeam !== null) {
-      fetchTeams(selectedTeam);
+      fetchTeams(dispatchTeams);
     }
-  }, [selectedTeam]);
+  }, []);
 
   const selectSport = (id: number | null) => {
     setSelectSport(id);
