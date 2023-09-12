@@ -213,7 +213,6 @@ const Preferences = () => {
     } catch (error) {
       console.error("Error saving preferences:", error);
     }
-
     Naviagate("/dashboard");
     window.location.reload();
   };
@@ -280,36 +279,44 @@ const Preferences = () => {
                   >
                     Choose Your Favorites
                   </Dialog.Title>
-                  <p>Sports</p>
-                  {sports.map((sport: any) => (
-                    <div key={sport.id}>
-                      <input
-                        type="checkbox"
-                        name={sport.name}
-                        id={sport.id}
-                        data-category="sports"
-                        onChange={handleCheckboxChange}
-                        checked={selectedPreferences.sports.includes(
-                          sport.name
-                        )}
-                      />
-                      <span className="font-bold"> {sport.name}</span>
-                    </div>
-                  ))}
-                  <p>Teams</p>
-                  {teams.map((team: any) => (
-                    <div key={team.id}>
-                      <input
-                        type="checkbox"
-                        name={team.name}
-                        id={team.id}
-                        data-category="teams"
-                        onChange={handleCheckboxChange}
-                        checked={selectedPreferences.teams.includes(team.name)}
-                      />
-                      <span className="font-bold"> {team.name}</span>
-                    </div>
-                  ))}
+                  <p className="mb-3 text-xl font-bold text-red-500">Sports</p>
+                  <div className="flex flex-wrap gap-4">
+                    {" "}
+                    {sports.map((sport: any) => (
+                      <div key={sport.id}>
+                        <input
+                          type="checkbox"
+                          name={sport.name}
+                          id={sport.id}
+                          data-category="sports"
+                          onChange={handleCheckboxChange}
+                          checked={selectedPreferences.sports.includes(
+                            sport.name
+                          )}
+                        />
+                        <span className="font-bold"> {sport.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mb-3 text-xl font-bold text-red-500">Teams</p>
+                  <div className="flex flex-wrap gap-4">
+                    {" "}
+                    {teams.map((team: any) => (
+                      <div key={team.id}>
+                        <input
+                          type="checkbox"
+                          name={team.name}
+                          id={team.id}
+                          data-category="teams"
+                          onChange={handleCheckboxChange}
+                          checked={selectedPreferences.teams.includes(
+                            team.name
+                          )}
+                        />
+                        <span className="font-bold"> {team.name}</span>
+                      </div>
+                    ))}{" "}
+                  </div>
                   <div className="flex justify-center gap-2">
                     <button
                       className="bg-red-500 p-1 pl-2 pr-2 hover:bg-red-700 rounded"

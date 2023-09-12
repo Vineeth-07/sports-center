@@ -92,7 +92,7 @@ const SignupForm: React.FC = () => {
       >
         Sign up
       </button>
-      <p className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4">
+      <p className="text-center w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4">
         <Link to="/">Home</Link>
       </p>
     </form>

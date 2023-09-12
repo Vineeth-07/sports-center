@@ -94,7 +94,7 @@ export default function ArticleListItems() {
       {user ? (
         <Tab.Group>
           <div className="flex justify-between">
-            <Tab.List className="space-x-4 rounded p-1 w-20/12">
+            <Tab.List className="space-x-4 rounded p-1 w-20/12 bg-purple-300">
               <Tab>
                 <p
                   key="all"
@@ -153,7 +153,7 @@ export default function ArticleListItems() {
                       preferences.sports.includes(article.sport.name) && (
                         <div
                           key={article.id}
-                          className="w-90 container flex-1 rounded border border-black flex text-left"
+                          className="w-90 my-9 container flex-1 rounded border border-black flex text-left bg-red-300"
                         >
                           <div className=" object-cover">
                             <img
@@ -197,7 +197,7 @@ export default function ArticleListItems() {
                   filteredArticles.map((article: any) => (
                     <div
                       key={article.id}
-                      className="w-90 container flex-1 rounded border border-black flex text-left"
+                      className="w-90 my-9 container flex-1 rounded border border-black flex text-left bg-red-300"
                     >
                       <div className=" object-cover">
                         <img
@@ -230,7 +230,7 @@ export default function ArticleListItems() {
       ) : (
         <Tab.Group>
           <div className="flex justify-between">
-            <Tab.List className="space-x-4 rounded p-1 w-20/12">
+            <Tab.List className="space-x-4 rounded border-2 border-black p-1 w-20/12 bg-purple-300">
               <Tab>
                 <p
                   key="all"
@@ -280,7 +280,7 @@ export default function ArticleListItems() {
                 filteredArticles.map((article: any) => (
                   <div
                     key={article.id}
-                    className="w-90 container flex-1 rounded border border-black flex text-left"
+                    className="w-90 my-9 container flex-1 rounded border border-black flex text-left bg-red-300"
                   >
                     <div className=" object-cover">
                       <img
@@ -288,7 +288,7 @@ export default function ArticleListItems() {
                         src={article.thumbnail}
                       />
                     </div>
-                    <div className="px-4 py-4">
+                    <div className="px-4 py-4 ">
                       <span className="mb-2 font-medium tracking-tight text-gray-900 dark:text-white ">
                         {article.sport.name}
                         <p className="font-bold ">

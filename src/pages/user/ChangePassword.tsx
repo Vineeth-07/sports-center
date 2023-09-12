@@ -47,7 +47,7 @@ const ChangePassword = () => {
   return (
     <div
       style={{ height: "400px", width: "600px" }}
-      className="mx-auto bg-gray-300 border-2 rounded"
+      className="mx-auto bg-gray-300 border-2 rounded flex flex-col justify-center items-center"
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -55,12 +55,15 @@ const ChangePassword = () => {
             Welcome {name}
           </h1>
           <br />
-          <Link
-            to="/dashboard"
-            className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4"
-          >
-            Home
-          </Link>
+          <div className="text-center">
+            <Link
+              to="/dashboard"
+              className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4"
+            >
+              Home
+            </Link>
+          </div>
+
           <br />
           <br />
           <label

@@ -173,10 +173,13 @@ export default function Favourites() {
           </select>
           {filteredArticles.map((article: any) => (
             <div key={article.id} className="bg-inherit">
-              <div key={article.id} className="bg-gray-300 p-4 m-2 rounded-lg">
+              <div
+                key={article.id}
+                className="bg-purple-300 p-4 m-2 rounded-lg"
+              >
                 <h2 className="font-semibold text-lg">{article.sport.name}</h2>
                 <h2 className="text-lg">{article.title}</h2>
-                <p className="bg-gray-200 p-2 rounded-lg relative">
+                <p className="bg-red-300 p-2 rounded-lg relative">
                   {article.summary.slice(0, 130)}...
                 </p>
                 <div className="flex justify-left">
@@ -227,10 +230,13 @@ export default function Favourites() {
           </select>
           {filteredArticles.map((article: any) => (
             <div key={article.id} className="bg-inherit">
-              <div key={article.id} className="bg-gray-300 p-4 m-2 rounded-lg">
+              <div
+                key={article.id}
+                className="bg-purple-300 p-4 m-2 rounded-lg"
+              >
                 <h2 className="font-semibold text-lg">{article.sport.name}</h2>
                 <h2 className="text-lg">{article.title}</h2>
-                <p className="bg-gray-200 p-2 rounded-lg relative">
+                <p className="bg-red-300 p-2 rounded-lg relative">
                   {article.summary.slice(0, 130)}...
                 </p>
                 <div className="flex justify-left">
