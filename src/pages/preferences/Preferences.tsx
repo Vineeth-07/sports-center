@@ -3,17 +3,18 @@ import { API_ENDPOINT } from "../../config/constants";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 
+interface PreferencesState {
+  sports: string[];
+  teams: string[];
+}
 const Preferences = () => {
   const Naviagate = useNavigate();
-  const [selectedPreferences, setSelectedPreferences] = useState({
-    basketball: false,
-    americanfootball: false,
-    rugby: false,
-    fieldhockey: false,
-    tabletennis: false,
-    cricket: false,
-  });
 
+  const [selectedPreferences, setSelectedPreferences] =
+    useState<PreferencesState>({
+      sports: [],
+      teams: [],
+    });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -24,13 +25,167 @@ const Preferences = () => {
     setIsModalOpen(false);
   };
 
-  const handleCheckboxChange = (event: {
-    target: { name: string; checked: boolean };
-  }) => {
-    const sport = event.target.name;
+  const sports = [
+    {
+      id: 1,
+      name: "Basketball",
+    },
+    {
+      id: 2,
+      name: "American Football",
+    },
+    {
+      id: 3,
+      name: "Rugby",
+    },
+    {
+      id: 4,
+      name: "Field Hockey",
+    },
+    {
+      id: 5,
+      name: "Table Tennis",
+    },
+    {
+      id: 6,
+      name: "Cricket",
+    },
+  ];
+
+  const teams = [
+    {
+      id: 1,
+      name: "Thunderbolts",
+      plays: "Basketball",
+    },
+    {
+      id: 2,
+      name: "Dragonslayers",
+      plays: "Basketball",
+    },
+    {
+      id: 3,
+      name: "Phoenix Rising",
+      plays: "Basketball",
+    },
+    {
+      id: 4,
+      name: "Avalanche",
+      plays: "Basketball",
+    },
+    {
+      id: 5,
+      name: "Titans",
+      plays: "American Football",
+    },
+    {
+      id: 6,
+      name: "Vortex Vipers",
+      plays: "American Football",
+    },
+    {
+      id: 7,
+      name: "Spectral Shadows",
+      plays: "American Football",
+    },
+    {
+      id: 8,
+      name: "Blitzkrieg",
+      plays: "American Football",
+    },
+    {
+      id: 9,
+      name: "Fury United",
+      plays: "Rugby",
+    },
+    {
+      id: 10,
+      name: "Lightning Strikes",
+      plays: "Rugby",
+    },
+    {
+      id: 11,
+      name: "Serpents of Fire",
+      plays: "Rugby",
+    },
+    {
+      id: 12,
+      name: "Galaxy Warriors",
+      plays: "Rugby",
+    },
+    {
+      id: 13,
+      name: "Stormbreakers",
+      plays: "Field Hockey",
+    },
+    {
+      id: 14,
+      name: "Enigma Enforcers",
+      plays: "Field Hockey",
+    },
+    {
+      id: 15,
+      name: "Blaze Squadron",
+      plays: "Field Hockey",
+    },
+    {
+      id: 16,
+      name: "Phantom Phantoms",
+      plays: "Field Hockey",
+    },
+    {
+      id: 17,
+      name: "Celestial Chargers",
+      plays: "Table Tennis",
+    },
+    {
+      id: 18,
+      name: "Rebel Renegades",
+      plays: "Table Tennis",
+    },
+    {
+      id: 19,
+      name: "Inferno Ignitors",
+      plays: "Table Tennis",
+    },
+    {
+      id: 20,
+      name: "Stealth Strikers",
+      plays: "Table Tennis",
+    },
+    {
+      id: 21,
+      name: "Nova Knights",
+      plays: "Cricket",
+    },
+    {
+      id: 22,
+      name: "Crimson Crushers",
+      plays: "Cricket",
+    },
+    {
+      id: 23,
+      name: "Rapid Raptors",
+      plays: "Cricket",
+    },
+    {
+      id: 24,
+      name: "Shadow Assassins",
+      plays: "Cricket",
+    },
+  ];
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target;
+    const category = event.target.getAttribute("data-category") as
+      | "sports"
+      | "teams";
+
     setSelectedPreferences((prevSelectedPreferences) => ({
       ...prevSelectedPreferences,
-      [sport]: event.target.checked,
+      [category]: checked
+        ? [...prevSelectedPreferences[category], name]
+        : prevSelectedPreferences[category].filter((item) => item !== name),
     }));
   };
 
@@ -57,6 +212,7 @@ const Preferences = () => {
     } catch (error) {
       console.error("Error saving preferences:", error);
     }
+
     Naviagate("../");
   };
   return (
@@ -120,17 +276,36 @@ const Preferences = () => {
                     as="h3"
                     className="text-xl font-bold text-white leading-6 text-gray-900 p-2 text-center"
                   >
-                    Choose Your Favorite Sports
+                    Choose Your Favorites
                   </Dialog.Title>
-                  {Object.keys(selectedPreferences).map((sport) => (
-                    <div key={sport}>
+                  <p>Sports</p>
+                  {sports.map((sport: any) => (
+                    <div key={sport.id}>
                       <input
                         type="checkbox"
-                        name={sport}
-                        id={sport}
+                        name={sport.name}
+                        id={sport.id}
+                        data-category="sports"
                         onChange={handleCheckboxChange}
+                        checked={selectedPreferences.sports.includes(
+                          sport.name
+                        )}
                       />
-                      <span className="font-bold"> {sport}</span>
+                      <span className="font-bold"> {sport.name}</span>
+                    </div>
+                  ))}
+                  <p>Teams</p>
+                  {teams.map((team: any) => (
+                    <div key={team.id}>
+                      <input
+                        type="checkbox"
+                        name={team.name}
+                        id={team.id}
+                        data-category="teams"
+                        onChange={handleCheckboxChange}
+                        checked={selectedPreferences.teams.includes(team.name)}
+                      />
+                      <span className="font-bold"> {team.name}</span>
                     </div>
                   ))}
                   <div className="flex justify-center gap-2">

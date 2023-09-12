@@ -6,7 +6,7 @@ import Dashboard from "../pages/dashboard";
 import Home from "../pages/Home";
 import ProtectedRoute from "./ProtectedRoute";
 
-const isUserAuthenticated = localStorage.getItem("authToken") !== null;
+const user = localStorage.getItem("authToken");
 
 const router = createBrowserRouter([
   {
@@ -33,14 +33,9 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-
   {
     path: "/",
-    element: isUserAuthenticated ? (
-      <Navigate to="/dashboard" replace />
-    ) : (
-      <Home />
-    ),
+    element: user ? <Navigate to="/dashboard" replace /> : <Home />,
   },
 ]);
 
