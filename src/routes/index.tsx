@@ -6,6 +6,7 @@ import Dashboard from "../pages/dashboard";
 import Home from "../pages/Home";
 import ProtectedRoute from "./ProtectedRoute";
 import ChangePassword from "../pages/user/ChangePassword";
+import NotFound from "../pages/NotFound";
 
 const user = localStorage.getItem("authToken");
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
   {
     path: "/changepassword",
