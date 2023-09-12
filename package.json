@@ -23,7 +23,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.14.1",
     "typescript": "^5.0.2",
-    "vite-plugin-pwa": "^0.16.4",
+    "vite-plugin-pwa": "^0.16.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

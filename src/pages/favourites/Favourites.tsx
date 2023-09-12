@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { API_ENDPOINT } from "../../config/constants";
-import { useArticlesState } from "../../context/articles/context";
+import {
+  useArticlesDispatch,
+  useArticlesState,
+} from "../../context/articles/context";
 import ArticleDetails from "../articles/ArticleDetails";
 import { fetchTeams } from "../../context/teams/action";
 import { fetchArticles } from "../../context/articles/action";
@@ -69,24 +72,27 @@ export default function Favourites() {
   useEffect(() => {
     const fetchPreferences = async () => {
       const authToken = localStorage.getItem("authToken");
-      const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      const data = await response.json();
-      setPreferences(data.preferences);
+      if (authToken) {
+        const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+        const data = await response.json();
+        setPreferences(data.preferences);
+      }
     };
     fetchPreferences();
   }, []);
+  const dispatchArticles = useArticlesDispatch();
 
   useEffect(() => {
     if (selectedSport !== null) {
-      fetchArticles(selectedSport);
+      fetchArticles(dispatchArticles);
     }
-  }, [selectedSport]);
+  }, []);
 
   useEffect(() => {
     if (selectedTeam !== null) {

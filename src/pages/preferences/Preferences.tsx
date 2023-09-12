@@ -209,11 +209,13 @@ const Preferences = () => {
 
       const responseData = await response.json();
       console.log("User Preferences are:", responseData);
+      closeModal();
     } catch (error) {
       console.error("Error saving preferences:", error);
     }
 
-    Naviagate("../");
+    Naviagate("/dashboard");
+    window.location.reload();
   };
   return (
     <>

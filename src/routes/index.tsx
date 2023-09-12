@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Logout from "../pages/logout";
 import Signin from "../pages/signin";
 import Signup from "../pages/signup";
@@ -7,8 +7,6 @@ import Home from "../pages/Home";
 import ProtectedRoute from "./ProtectedRoute";
 import ChangePassword from "../pages/user/ChangePassword";
 import NotFound from "../pages/NotFound";
-
-const user = localStorage.getItem("authToken");
 
 const router = createBrowserRouter([
   {
@@ -41,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: user ? <Navigate to="/dashboard" replace /> : <Home />,
+    element: <Home />,
   },
 ]);
 
