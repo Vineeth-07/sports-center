@@ -5,6 +5,7 @@ import Signup from "../pages/signup";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/Home";
 import ProtectedRoute from "./ProtectedRoute";
+import ChangePassword from "../pages/user/ChangePassword";
 
 const user = localStorage.getItem("authToken");
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     path: "/changepassword",
     element: (
       <ProtectedRoute>
-        <Dashboard />
+        <ChangePassword />
       </ProtectedRoute>
     ),
   },
