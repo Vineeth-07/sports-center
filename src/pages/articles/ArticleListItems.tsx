@@ -89,9 +89,13 @@ export default function ArticleListItems() {
       : articles.filter((article: any) => article.sport.id === selectedSport);
 
   filteredArticles.sort(sortArticles);
+  console.log(preferences);
+  console.log(Object.keys(preferences).length);
   return (
     <>
-      {user && Object.keys(preferences).length > 0 ? (
+      {user &&
+      (Object.keys(preferences).length > 0 ||
+        Object.keys(preferences).length === 2) ? (
         <Tab.Group>
           <div className="flex justify-between">
             <Tab.List className="space-x-4 rounded p-1 w-20/12 bg-purple-300">
