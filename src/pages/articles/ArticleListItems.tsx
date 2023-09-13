@@ -89,9 +89,6 @@ export default function ArticleListItems() {
       : articles.filter((article: any) => article.sport.id === selectedSport);
 
   filteredArticles.sort(sortArticles);
-  console.log(preferences);
-  console.log(Object.keys(preferences));
-  console.log(Object.keys(preferences).length);
   return (
     <>
       {user &&

@@ -33,3 +33,7 @@ npm start
 ## Live application URL
 
 https://sportsbuzz.netlify.app
+
+## Demo video
+
+https://www.loom.com/share/5c568f51a697422099e5a82bda782675?sid=1d25c993-2c92-4b5a-a52b-2b058cc9153d
