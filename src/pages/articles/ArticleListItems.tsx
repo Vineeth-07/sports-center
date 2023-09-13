@@ -90,10 +90,12 @@ export default function ArticleListItems() {
 
   filteredArticles.sort(sortArticles);
   console.log(preferences);
+  console.log(Object.keys(preferences));
   console.log(Object.keys(preferences).length);
   return (
     <>
       {user &&
+      Object.keys(preferences) &&
       (Object.keys(preferences).length > 0 ||
         Object.keys(preferences).length === 2) ? (
         <Tab.Group>

@@ -128,6 +128,7 @@ export default function Favourites() {
   return (
     <>
       {user &&
+      Object.keys(preferences) &&
       (Object.keys(preferences).length > 0 ||
         Object.keys(preferences).length === 2) ? (
         <div>
