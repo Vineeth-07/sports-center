@@ -91,7 +91,7 @@ export default function ArticleListItems() {
   filteredArticles.sort(sortArticles);
   return (
     <>
-      {user ? (
+      {user && Object.keys(preferences).length > 0 ? (
         <Tab.Group>
           <div className="flex justify-between">
             <Tab.List className="space-x-4 rounded p-1 w-20/12 bg-purple-300">
@@ -140,7 +140,7 @@ export default function ArticleListItems() {
             </Tab.List>
           </div>
           <Tab.Panels>
-            {preferences.sports.length ? (
+            {preferences && preferences.sports.length ? (
               <Tab.Panel>
                 {filteredArticles.length === 0 ? (
                   <img

@@ -127,7 +127,7 @@ export default function Favourites() {
 
   return (
     <>
-      {user ? (
+      {user && Object.keys(preferences).length > 0 ? (
         <div>
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-medium dark:text-white">Favourites</h2>
